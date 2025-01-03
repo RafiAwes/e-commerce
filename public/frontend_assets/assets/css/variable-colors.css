@@ -1,0 +1,18 @@
+:root {
+  --primary-color: #000;
+  --secondary-color: #d4145a;
+  --white-color: #fff;
+  --off-white-color: #f5f5f5;
+  --title-color: #222831;
+  --paragraph-color: #252a34;
+  --border-color: #ccc;
+  --alert-color: #ff1818;
+  --success-color: #34be82;
+  --warning-color: #f8b400;
+  --hints-color: #767a7a;
+  --body-color: #666;
+  --border-color-light: #ccc;
+  --grey-color: #00baa3;
+  --grey-color-light: #f5f5f5;
+  --light-color: #999;
+}

@@ -30,6 +30,7 @@
         <link rel="stylesheet" href="{{ url('/') }}/backend_assets/css/custom.css" />
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 
+        {{-- @vite('resources/css/app.css') --}}
         {{-- font awesome --}}
         {{-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" /> --}}
         <!--[if lt IE 9]>
@@ -66,10 +67,18 @@
                             <a href="{{route('admin.dashboard')}}"> <i class="fa fa-dashboard yellow_color"></i> <span>Dashboard</span></a>
                         </li>
                         <li>
-                            <a href="#element" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa fa-solid fa-code-fork white_color"></i> <span>Categories</span></a>
-                            <ul class="collapse list-unstyled" id="element">
-                                <li><a href="general_elements.html"><i class="fa fa-plus white_color"></i> <span>Add Category</span></a></li>
-                                <li><a href="media_gallery.html"><i class="fa fa-solid fa-icons white_color"></i> <span>Category List</span></a></li>
+                            <a href="#category" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa fa-solid fa-code-fork white_color"></i> <span>Categories</span></a>
+                            <ul class="collapse list-unstyled" id="category">
+                                <li><a href="{{route('category.view.form')}}"><i class="fa fa-plus white_color"></i> <span>Category</span></a></li>
+                                <li><a href="{{route('category.view.subcategory')}}"><i class="fa fa-plus white_color"></i> <span>Sub-Category</span></a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="#product" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa fa-object-group blue2_color"></i> <span>Product</span></a>
+                            <ul class="collapse list-unstyled" id="product">
+                                <li><a href="{{route('product.form')}}">> <span>Insert Product</span></a></li>
+                                <li><a href="{{route('product.list')}}">> <span>Product List</span></a></li>
+                                <li><a href="media_gallery.html">> <span>Media Gallery</span></a></li>
                             </ul>
                         </li>
                         <li><a href="widgets.html"><i class="fa fa-clock-o orange_color"></i> <span>Widgets</span></a></li>
@@ -83,14 +92,7 @@
                             </ul>
                         </li>
                         <li><a href="tables.html"><i class="fa fa-table purple_color2"></i> <span>Tables</span></a></li>
-                        <li>
-                            <a href="#apps" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa fa-object-group blue2_color"></i> <span>Apps</span></a>
-                            <ul class="collapse list-unstyled" id="apps">
-                                <li><a href="email.html">> <span>Email</span></a></li>
-                                <li><a href="calendar.html">> <span>Calendar</span></a></li>
-                                <li><a href="media_gallery.html">> <span>Media Gallery</span></a></li>
-                            </ul>
-                        </li>
+
                         <li><a href="price.html"><i class="fa fa-briefcase blue1_color"></i> <span>Pricing Tables</span></a></li>
                         <li>
                             <a href="contact.html">
@@ -139,12 +141,11 @@
                                         </ul>
                                         <ul class="user_profile_dd">
                                             <li>
-                                                <a class="dropdown-toggle" data-toggle="dropdown"><img class="img-responsive rounded-circle" src="{{url('/')}}/backend_assets/images/layout_img/user_img.jpg" alt="#" /><span class="name_user">{{auth()->user()->admin_name}}</span></a>
+                                                <a class="dropdown-toggle" data-toggle="dropdown"><img class="img-responsive rounded-circle" src="{{url('/')}}/backend_assets/images/layout_img/user_img.jpg" alt="#" /><span class="name_user">{{Auth::guard('admin')->check() ? Auth::guard('admin')->user()->admin_name : $admin_name->admin_name}}</span></a>
                                                 <div class="dropdown-menu">
                                                     <a class="dropdown-item" href="profile.html">My Profile</a>
                                                     <a class="dropdown-item" href="settings.html">Settings</a>
                                                     <a class="dropdown-item" href="help.html">Help</a>
-                                                    <a class="dropdown-item" href="#"><span>Log Out</span> <i class="fa fa-sign-out"></i></a>
                                                     <form method="POST" action="{{ route('admin.logout') }}">
                                                         @csrf
                                                         <a class="dropdown-item" href="{{ route('admin.logout') }}" onclick="event.preventDefault(); this.closest('form').submit()"><span>Log Out</span> <i class="fa fa-sign-out"></i></a>
